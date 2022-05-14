@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionDataService } from 'src/app/services/session-data.service';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private sessionDataService: SessionDataService) { }
 
   ngOnInit(): void {
   
   }
 
-  submit(code: String): void{
-    console.log(code)
+  submit(code: string): void{
+    console.log(code);
+    this.sessionDataService.set('orgCode', code);
+    this.router.navigate(['home']);
   }
-
 }
