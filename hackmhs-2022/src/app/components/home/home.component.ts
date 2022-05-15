@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionDataService } from 'src/app/services/session-data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  orgCode: string = "";
+
+  constructor(private sessionDataService: SessionDataService) { 
+    sessionDataService.get("orgCode").subscribe((c: string) => {
+      this.orgCode = c;
+    });
+  }
 
   ngOnInit(): void {
   }
