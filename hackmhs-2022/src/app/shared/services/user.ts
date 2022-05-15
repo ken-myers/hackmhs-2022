@@ -5,6 +5,6 @@ export interface User {
     displayName: string;
     photoURL: string;
     accountType: string;
-    teamName: string;
+    teamName?: string;
     todoList?: Array<String>;
 }
