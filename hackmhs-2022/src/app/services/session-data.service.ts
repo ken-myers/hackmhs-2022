@@ -8,21 +8,21 @@ export class SessionDataService {
 
   stringDict = new Map<string, string>();
 
-  constructor() { 
+  constructor() {
     this.stringDict.set("userID", "testman");
 
   }
 
 
-  set(key: string, val: string){
+  set(key: string, val: string) {
     this.stringDict.set(key, val);
   }
 
-  get(key:string): Observable<string>{
+  get(key: string): string {
     let r = this.stringDict.get(key);
-    if(r!=undefined){
-      return of(r);
+    if (r != undefined) {
+      return (r);
     }
-    return of('');
+    return ('');
   }
 }
