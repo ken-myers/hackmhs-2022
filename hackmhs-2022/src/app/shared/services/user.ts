@@ -1,3 +1,5 @@
+import {Task} from "../../models/task";
+
 export interface User {
     uid: string;
     orgCode: string;
@@ -6,5 +8,9 @@ export interface User {
     photoURL: string;
     accountType: string;
     teamName: string;
-    todoList?: Array<String>;
+    todoList?: Task[];
+
+    subjects?: string[];
+    role?: string;
+    
 }

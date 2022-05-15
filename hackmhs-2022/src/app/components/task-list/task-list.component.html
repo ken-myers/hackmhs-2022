@@ -1,18 +1,8 @@
 <fieldset>
     <legend>Onboarding Task List</legend>
-
-    <div>
-        <input type="checkbox" id="social" name="social">
-        <label for="social">Check out team profiles</label>
-    </div>
-
-    <div>
-        <input type="checkbox" id="timeline" name="timeline">
-        <label for="timeline">Project Timeline</label>
-    </div>
-    <div>
-        <input type="checkbox" id="resources" name="resources">
-        <label for="resources">Explore important team resources</label>
+    <div *ngFor = "let task of tasks; let i = index">
+        <input type = "checkbox" id = "check{{i}}" name="check{{i}}" [checked] = "task.completed"/>
+        <label for = "check{{i}}">{{task.text}}</label>
     </div>
 
 
