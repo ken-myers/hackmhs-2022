@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TeamComponent } from './components/team/team.component';
 import { HomeComponent } from './components/home/home.component';
-import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { TeamSummaryComponent } from './components/team-summary/team-summary.com
     TaskListComponent,
     TeamComponent,
     HomeComponent,
-    TeamSummaryComponent
   ],
   imports: [
     BrowserModule,
