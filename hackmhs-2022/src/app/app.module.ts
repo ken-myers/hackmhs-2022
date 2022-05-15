@@ -20,8 +20,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthService } from './shared/services/auth.service';
+import { ListAdminComponent } from './components/list-admin/list-admin.component';
+import { AsyncPipe, CommonModule } from '@angular/common';
 @NgModule({
-  declarations:   [
+  declarations: [
     AppComponent,
     LoginComponent,
     TaskListComponent,
@@ -30,6 +32,7 @@ import { AuthService } from './shared/services/auth.service';
     TeamSummaryComponent,
     LoginComponent,
     SignUpComponent,
+    ListAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { AuthService } from './shared/services/auth.service';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    CommonModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

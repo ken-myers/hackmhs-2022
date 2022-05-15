@@ -10,7 +10,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[] =[];
+  tasks: Task[] = [
+    new Task("Set up your laptop", true),
+    new Task("Configure your RapidIdentity", false),
+    new Task("Get badged", false),
+    new Task("Onboarding paperwork", false),
+    new Task("Review schedule", false)
+  ];
   @Input() user!: User;
   constructor() {
 
@@ -18,8 +24,8 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.user);
-    let t= this.user.todoList;
-    if (t){
+    let t = this.user.todoList;
+    if (t) {
       this.tasks = t;
     }
   }

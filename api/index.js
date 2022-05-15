@@ -26,16 +26,21 @@ app.get('/', (request, response) => {
 });
 
 app.get('/users/:id', db.getUserById);
+app.get('/users/email/:email', db.getUserByEmail);
 app.get('/teams/:id', db.getTeamById);
+app.get('/teams/:id/users', db.getTeamUsers);
 app.get('/timeline-items/:id', db.getTeamTimelineItems);
+app.get('/teams/:id/defaultTodoItems', db.getDefaultTodoItems);
 
 app.post('/teams', db.createUser);
 app.post('/users', db.createUser);
 app.post('/timeline-items', db.createTimelineItem);
+app.post('/teams/:id/addDefaultTodoItem', db.addDefaultTodoItem);
 
 app.delete('/users/:id', db.deleteUser);
 app.delete('/teams/:id', db.deleteTeam);
 app.delete('/teams/:teamID', db.deleteTeam);
+app.delete('/teams/:id/deleteDefaultTodoItem', db.deleteDefaultTodoItem);
 
 
 app.listen(port, () => {

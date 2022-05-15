@@ -15,8 +15,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE teams (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
+    id VARCHAR PRIMARY KEY,
+    team_name VARCHAR NOT NULL,
     bio VARCHAR,
     default_tasks VARCHAR []
 );
@@ -30,35 +30,30 @@ CREATE TABLE timeline_items (
 );
 
 INSERT INTO
-    users (
+    teams (
         id,
-        student_id,
-        first_name,
-        last_name,
-        email,
-        grad_class,
-        is_teacher
+        team_name,
+        bio,
+        default_tasks
     )
 VALUES
     (
-        1,
-        452060,
-        'Michelle',
-        'Nguyen',
-        'nguye452060@student.aisd.net',
-        2022,
-        false
+        'martin',
+        'Martin HS',
+        'Home of the Martin Warriors. We are a high school dedicated to excellence in all areas.',
+        ARRAY [ 'Get to know teachers', 'Read the district website', 'Learn common instructional tools' ]
     ) RETURNING *;
 
 INSERT INTO
-    users (id, first_name, last_name, email, is_teacher)
+    users (id, display_name, email, account_type, org_code, photo_url)
 VALUES
     (
-        2,
-        'Marianne',
-        'Varner',
+        '1',
+        'Marianne Varner',
         'mvarner@aisd.net',
-        true
+        'admin',
+        'martin',
+        'https://picsum.photos/200'
     ) RETURNING *;
 
 INSERT INTO
@@ -84,3 +79,5 @@ DELETE FROM
     users
 WHERE
     ID = 1;
+
+SELECT users.*, teams.team_name FROM users JOIN teams ON email = 'michellehwin@gmail.com' and teams.id = users.org_code;

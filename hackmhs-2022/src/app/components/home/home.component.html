@@ -1,14 +1,22 @@
-<div *ngIf = "orgCode != undefined; else noCode" class="container mt-5">
-    <div class="sidenav">
-        <app-task-list [user]="user"></app-task-list>
-    </div>
-    <div class="main">
-        <app-team-summary [user]="user"></app-team-summary>
-    </div>
-</div>
+<ng-container *ngIf="user$ | async as user" class="container mt-5">
+    <ng-container *ngIf="user.account_type == 'new-hire'; else admin">
+        <div *ngIf="user.org_code != undefined; else noCode">
+            <div class="sidenav">
+                <app-task-list [user]="user"></app-task-list>
+            </div>
+            <div class="main">
+                <app-team-summary [user]="user"></app-team-summary>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noCode>
+        <p>
+            No organization provided.
+        </p>
+    </ng-template>
 
-<ng-template #noCode>
-    <p>
-        No organization provided.
-    </p>
-</ng-template>
+    <ng-template #admin>
+        <app-list-admin [user]="user"></app-list-admin>
+        <app-team [teamCode]="user.org_code"></app-team>
+    </ng-template>
+</ng-container>

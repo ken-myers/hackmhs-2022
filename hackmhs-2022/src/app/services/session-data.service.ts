@@ -9,8 +9,6 @@ export class SessionDataService {
   stringDict = new Map<string, string>();
 
   constructor() {
-    this.stringDict.set("userID", "testman");
-
   }
 
 

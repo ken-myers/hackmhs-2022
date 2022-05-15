@@ -8,13 +8,14 @@ import { User } from '../shared/services/user';
 })
 export class TeamSummaryComponent implements OnInit {
 
-  
-  @Input() user!: User;
 
-  constructor() { }
+  @Input() user!: User;
+  orgCode: string = this.user.org_code;
+  constructor() {
+  }
 
 
   ngOnInit(): void {
+    this.orgCode = this.user.org_code;
   }
-
 }

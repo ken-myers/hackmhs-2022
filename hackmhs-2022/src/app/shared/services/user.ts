@@ -1,4 +1,4 @@
-import {Task} from "../../models/task";
+import { Task } from "../../models/task";
 
 export interface User {
     id: string;
@@ -7,10 +7,10 @@ export interface User {
     display_name: string;
     photo_url: string;
     account_type: string;
-    teamName?: string;
+    team_name?: string;
     todoList?: Task[];
 
     subjects?: string[];
     role?: string;
-    
+
 }

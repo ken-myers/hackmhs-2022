@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 const getUserById = (request, response) => {
-    const id = parseInt(request.params.id);
+    const id = request.params.id;
 
     pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
         if (error) {
@@ -20,8 +20,19 @@ const getUserById = (request, response) => {
     });
 };
 
+const getUserByEmail = (request, response) => {
+    const id = request.params.email;
+
+    pool.query('SELECT users.*, teams.team_name FROM users JOIN teams ON email = $1 AND teams.id = users.org_code', [id], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows[0]);
+    });
+};
+
 const getTeamById = (request, response) => {
-    const id = parseInt(request.params.id);
+    const id = request.params.id;
 
     pool.query('SELECT * FROM teams WHERE id = $1', (error, results) => {
         if (error) {
@@ -32,7 +43,7 @@ const getTeamById = (request, response) => {
 };
 
 const getTeamTimelineItems = (request, response) => {
-    const id = parseInt(request.params.id);
+    const id = request.params.id;
 
     pool.query('SELECT * FROM timeline_items WHERE id = $1', (error, results) => {
         if (error) {
@@ -76,7 +87,7 @@ const createTimelineItem = (request, response) => {
 };
 
 const deleteUser = (request, response) => {
-    const id = parseInt(request.params.id);
+    const id = request.params.id;
 
     pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
         if (error) {
@@ -87,7 +98,7 @@ const deleteUser = (request, response) => {
 };
 
 const deleteTeam = (request, response) => {
-    const id = parseInt(request.params.id);
+    const id = request.params.id;
 
     pool.query('DELETE FROM teams WHERE id = $1', [id], (error, results) => {
         if (error) {
@@ -97,13 +108,64 @@ const deleteTeam = (request, response) => {
     });
 };
 
+
+const getTeamUsers = (request, response) => {
+    const id = request.params.id;
+    
+    pool.query('SELECT * FROM users WHERE users.org_code = $1', [id], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    });
+};
+
+const getDefaultTodoItems = (request, response) => {
+    const id = request.params.id;
+
+    pool.query('SELECT default_tasks FROM teams WHERE teams.id = $1', [id], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows[0]['default_tasks']);
+    });
+};
+
+const addDefaultTodoItem = (request, response) => {
+    const id = request.params.id;
+    const { task } = request.body;
+
+    pool.query('UPDATE teams SET default_tasks = array_append(default_tasks, $1) WHERE teams.id = $2', [task, id], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json({ message: `Added item ${task} to team with ID: ${id}` });
+    });
+};
+
+const deleteDefaultTodoItem = (request, response) => {
+    const id = request.params.id;
+    const { task } = request.body;
+
+    pool.query('UPDATE teams SET default_tasks = array_remove(default_tasks, $1) WHERE teams.id = $2', [task, id], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json({ message: `Retrieved users from team with ID: ${id}` });
+    });
+};
 module.exports = {
     getUserById,
+    getUserByEmail,
     getTeamById,
     getTeamTimelineItems,
     createUser,
     createTeam,
     createTimelineItem,
     deleteUser,
-    deleteTeam
+    deleteTeam,
+    getTeamUsers,
+    addDefaultTodoItem,
+    deleteDefaultTodoItem,
+    getDefaultTodoItems
 };

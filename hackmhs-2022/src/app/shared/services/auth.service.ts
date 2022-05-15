@@ -17,7 +17,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class AuthService {
   userData: any; // Save logged in user data
-  apiURL: string = "https://e349-208-184-165-135.ngrok.io/";
+  apiURL: string = "https://e349-208-184-165-135.ngrok.io";
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -27,6 +27,8 @@ export class AuthService {
     private http: HttpClient
     // NgZone service to remove outside scope warning
   ) {
+    this.apiURL = "http://localhost:3000";
+
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -45,6 +47,7 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        this.localStorage.set('userEmail', email);
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
@@ -80,9 +83,11 @@ export class AuthService {
       org_code: orgCode,
       account_type: "new-hire"
     };
-    console.log(userData);
-    this.http.post<User>(this.apiURL +"/users", userData).subscribe(
-      (e) => { console.log(e)}
+
+    this.localStorage.set('userEmail', user.email);
+
+    this.http.post<User>(this.apiURL + "/users", userData).subscribe(
+      (e) => { console.log(e) }
     );
   }
   // Sign out

@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { Observable, ObservedValuesFromArray, of } from 'rxjs';
 import { Task } from '../models/task';
 import { User } from '../shared/services/user';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  devDB = [<User>{
-    id: "qwer", org_code: "1234", email: "g@g.com", display_name: "Bob", photo_url: "123.com", account_type: "admin", teamName: "swag",
-    todoList: [new Task("test", false)]
+  apiURL: string = "https://e349-208-184-165-135.ngrok.io";
 
-  }]
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.apiURL = "http://localhost:3000";
+  }
 
-  getUser(id: string): Observable<User> {
-    return of(this.devDB[0]);
+  getUser(email: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURL}/users/email/${encodeURIComponent(email)}`);
   }
 }

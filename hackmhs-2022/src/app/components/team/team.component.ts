@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/shared/services/user';
 
@@ -11,16 +12,16 @@ import { User } from 'src/app/shared/services/user';
 
 export class TeamComponent implements OnInit {
 
-  team: User[] = [];
+  team$: Observable<User[]>;
 
   @Input() teamCode!: string;
 
-  constructor(private teamService: TeamService) { }
+  constructor(private teamService: TeamService) {
+    this.team$ = this.teamService.getUsers(this.teamCode);
+  }
 
   ngOnInit(): void {
-    this.teamService.getTeam(this.teamCode).subscribe((t)=> {
-      this.team = t;
-    })
+    
   }
 
 }

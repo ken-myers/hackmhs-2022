@@ -1,4 +1,6 @@
-<h1>
-    Hello, {{user.display_name}}.<br>Welcome to {{user.teamName}}.
-</h1>
-<app-team></app-team>
+<ng-container *ngIf="user">
+    <h1>
+        Hello, {{user.display_name}}.<br>Welcome to {{user.team_name}}.
+    </h1>
+    <app-team [teamCode]="orgCode"></app-team>
+</ng-container>
