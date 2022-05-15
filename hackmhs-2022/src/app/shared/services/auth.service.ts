@@ -17,6 +17,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  apiURL: string = "https://e349-208-184-165-135.ngrok.io/";
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -80,7 +81,7 @@ export class AuthService {
       account_type: "new-hire"
     };
     console.log(userData);
-    this.http.post<User>("https://e349-208-184-165-135.ngrok.io/users", userData).subscribe(
+    this.http.post<User>(this.apiURL +"/users", userData).subscribe(
       (e) => { console.log(e)}
     );
   }
