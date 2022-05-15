@@ -1,9 +1,9 @@
 export interface User {
     uid: string;
-    teamID: string;
+    orgCode: string;
     email: string;
     displayName: string;
     photoURL: string;
     accountType: string;
-    todoList: Array<String>;
+    todoList?: Array<String>;
 }
