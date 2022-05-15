@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
   user: User = <User>{};
   constructor(private userService: UserService, private sessionDataService: SessionDataService) { 
     this.userID = sessionDataService.get('userID');
-    userService.getUser(this.userID).subscribe((u)=>{
+    userService.getUser(this.userID).subscribe((u: User)=>{
       this.user = u;
-    })
+    });
+
+    console.log(this.user)
   }
 
   ngOnInit(): void {
