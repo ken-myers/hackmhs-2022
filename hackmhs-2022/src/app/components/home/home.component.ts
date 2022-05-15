@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionDataService } from 'src/app/services/session-data.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/shared/services/user';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,13 @@ import { SessionDataService } from 'src/app/services/session-data.service';
 export class HomeComponent implements OnInit {
 
   orgCode: string = "";
-
-  constructor(private sessionDataService: SessionDataService) { 
-    sessionDataService.get("orgCode").subscribe((c: string) => {
-      this.orgCode = c;
-    });
+  userID: string = "";
+  user: User = <User>{};
+  constructor(private userService: UserService, private sessionDataService: SessionDataService) { 
+    this.userID = sessionDataService.get('userID');
+    userService.getUser(this.userID).subscribe((u)=>{
+      this.user = u;
+    })
   }
 
   ngOnInit(): void {
