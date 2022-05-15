@@ -1,6 +1,10 @@
-<div *ngIf = "orgCode != undefined; else noCode">
-    <app-task-list [user]="user"></app-task-list>
-    <app-team-summary [user]="user"></app-team-summary>
+<div *ngIf = "orgCode != undefined; else noCode" class="container mt-5">
+    <div class="sidenav">
+        <app-task-list [user]="user"></app-task-list>
+    </div>
+    <div class="main">
+        <app-team-summary [user]="user"></app-team-summary>
+    </div>
 </div>
 
 <ng-template #noCode>
