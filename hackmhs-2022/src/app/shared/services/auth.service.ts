@@ -49,11 +49,10 @@ export class AuthService {
       });
   }
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string, orgCode: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -87,6 +86,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       orgCode: user.orgCode,
+      teamName: user.teamName,
       accountType: "new-hire"
     };
     return userRef.set(userData, {

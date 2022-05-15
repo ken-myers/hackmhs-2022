@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthService } from './shared/services/auth.service';
 @NgModule({
-  declarations: [
+  declarations:   [
     AppComponent,
     LoginComponent,
     TaskListComponent,
