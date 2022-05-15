@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div *ngIf = "orgCode != undefined; else noCode">
+    <app-task-list></app-task-list>
+    <app-team-summary></app-team-summary>
+</div>
+
+<ng-template #noCode>
+    <p>
+        No organization provided.
+    </p>
+</ng-template>

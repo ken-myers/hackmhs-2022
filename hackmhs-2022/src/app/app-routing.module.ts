@@ -10,7 +10,9 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 const routes: Routes = [{ path: 'login', component: LoginComponent },
 { path: 'task-list', component: TaskListComponent },
 { path: 'team', component: TeamComponent },
-{ path: 'timeline', component: TimelineComponent }];
+{ path: 'timeline', component: TimelineComponent },
+{ path: 'home', component: HomeComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
