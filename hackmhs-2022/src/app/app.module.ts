@@ -10,6 +10,15 @@ import { TeamComponent } from './components/team/team.component';
 import { HomeComponent } from './components/home/home.component';
 import { TeamSummaryComponent } from './team-summary/team-summary.component';
 
+// Firebase services + environment module
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthService } from './shared/services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +27,20 @@ import { TeamSummaryComponent } from './team-summary/team-summary.component';
     TeamComponent,
     HomeComponent,
     TeamSummaryComponent,
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
