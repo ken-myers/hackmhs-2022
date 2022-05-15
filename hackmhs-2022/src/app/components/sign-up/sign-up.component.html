@@ -1,24 +1,24 @@
-<div class="authBlock">
+<div class="authBlock container mt-4">
     <h3>Sign Up</h3>
     <div class="formGroup">
         <input type="text" class="formControl" placeholder="Name" #userName required />
     </div>
-    <div class="formGroup">
+    <div class="formGroup mt-2">
         <input type="email" class="formControl" placeholder="Email Address" #userEmail required />
     </div>
-    <div class="formGroup">
+    <div class="formGroup mt-2">
         <input type="password" class="formControl" placeholder="Password" #userPwd required />
     </div>
-    <div class="formGroup">
+    <div class="formGroup mt-2">
         <input type="text" class="formControl" placeholder="Organization Code" #orgCode required />
     </div>
-    <div class="formGroup">
-        <input type="button" class="btn btnPrimary" value="Sign Up"
+    <div class="formGroup mt-2">
+        <input type="button" class="btn btn-primary btn-sm" value="Sign Up"
             (click)="authService.SignUp(userEmail.value, userPwd.value, orgCode.value, userName.value)" />
     </div>
 
-</div>
-<div class="redirectToLogin">
-    <span>Already have an account?
-        <span class="redirect" routerLink="/login">Log In</span></span>
+    <div class="redirectToLogin mt-2">
+        <span>Already have an account?
+            <span class="redirect" routerLink="/login">Log In</span></span>
+    </div>
 </div>
