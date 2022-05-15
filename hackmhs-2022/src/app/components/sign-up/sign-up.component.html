@@ -1,6 +1,9 @@
 <div class="authBlock">
     <h3>Sign Up</h3>
     <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Name" #userName required />
+    </div>
+    <div class="formGroup">
         <input type="email" class="formControl" placeholder="Email Address" #userEmail required />
     </div>
     <div class="formGroup">
@@ -11,11 +14,11 @@
     </div>
     <div class="formGroup">
         <input type="button" class="btn btnPrimary" value="Sign Up"
-            (click)="authService.SignUp(userEmail.value, userPwd.value, orgCode.value)" />
+            (click)="authService.SignUp(userEmail.value, userPwd.value, orgCode.value, userName.value)" />
     </div>
-   
+
 </div>
 <div class="redirectToLogin">
     <span>Already have an account?
-        <span class="redirect" routerLink="/sign-in">Log In</span></span>
+        <span class="redirect" routerLink="/login">Log In</span></span>
 </div>

@@ -1,22 +1,29 @@
-CREATE DATABASE hackMHS2022;
+CREATE DATABASE hackmhs2022;
+
+CREATE ROLE hackmhsadmin WITH LOGIN PASSWORD 'hackmhspass';
+
+GRANT ALL PRIVILEGES ON TABLE users TO michelle;
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    orgCode INTEGER,
+    id VARCHAR PRIMARY KEY,
+    org_code VARCHAR,
     display_name VARCHAR,
     email VARCHAR(255) UNIQUE,
     account_type VARCHAR,
-    photo_url VARCHAR
+    photo_url VARCHAR,
+    todos json
 );
 
 CREATE TABLE teams (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
-    bio VARCHAR
+    bio VARCHAR,
+    default_tasks VARCHAR []
 );
 
-CREATE TABLE timeline-items (
+CREATE TABLE timeline_items (
     id SERIAL PRIMARY KEY,
+    teamID INTEGER,
     title VARCHAR NOT NULL,
     description VARCHAR,
     users INTEGER []

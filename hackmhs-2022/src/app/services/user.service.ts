@@ -7,13 +7,14 @@ import { User } from '../shared/services/user';
   providedIn: 'root'
 })
 export class UserService {
-  devDB =[<User>{uid: "qwer", orgCode:"1234", email:"g@g.com", displayName: "Bob", photoURL:"123.com", accountType: "admin", teamName:"swag",
-  todoList: [new Task("test", false)]
+  devDB = [<User>{
+    id: "qwer", org_code: "1234", email: "g@g.com", display_name: "Bob", photo_url: "123.com", account_type: "admin", teamName: "swag",
+    todoList: [new Task("test", false)]
 
-}]
+  }]
   constructor() { }
 
-  getUser(id: string): Observable<User>{
+  getUser(id: string): Observable<User> {
     return of(this.devDB[0]);
   }
 }
