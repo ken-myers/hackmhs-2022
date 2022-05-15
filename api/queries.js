@@ -9,18 +9,6 @@ const pool = new Pool({
     port: 5432,
 });
 
-const getUsers = (request, response) => {
-    pool.query('SELECT * FROM pg_catalog.pg_tables', function (err, result) {
-        console.log(err, result);
-    });
-    pool.query('SELECT * FROM users', (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(200).json(results.rows);
-    });
-};
-
 const getUserById = (request, response) => {
     const id = parseInt(request.params.id);
 
@@ -28,12 +16,25 @@ const getUserById = (request, response) => {
         if (error) {
             throw error;
         }
-        response.status(200).json(results.rows);
+        response.status(200).json(results.rows[0]);
     });
 };
 
-const getEvents = (request, response) => {
-    pool.query('SELECT * FROM events', (error, results) => {
+const getTeamById = (request, response) => {
+    const id = parseInt(request.params.id);
+
+    pool.query('SELECT * FROM teams WHERE id = $1', (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows[0]);
+    });
+};
+
+const getTeamTimelineItems = (request, response) => {
+    const id = parseInt(request.params.id);
+
+    pool.query('SELECT * FROM timeline_items WHERE id = $1', (error, results) => {
         if (error) {
             throw error;
         }
@@ -42,9 +43,31 @@ const getEvents = (request, response) => {
 };
 
 const createUser = (request, response) => {
-    const { id, student_id, first_name, last_name, grad_class, is_teacher, email } = request.body;
+    const { id, display_name, email, org_code, account_type, photo_url } = request.body;
 
-    pool.query('INSERT INTO users (id, student_id, first_name, last_name, grad_class, is_teacher, email) VALUES ($1, $2, $3, $4, $5, $6)', [id, student_id, first_name, last_name, grad_class, is_teacher, email], (error, result) => {
+    pool.query('INSERT INTO users (id, display_name, email, org_code, account_type, photo_url) VALUES ($1, $2, $3, $4, $5, $6)', [id, display_name, email, org_code, account_type, photo_url], (error, result) => {
+        if (error) {
+            throw error;
+        }
+        response.status(201).send(`User added with ID: ${result.id}`);
+    });
+};
+
+const createTeam = (request, response) => {
+    const { name, bio, default_tasks } = request.body;
+
+    pool.query('INSERT INTO users (name, bio, default_tasks) VALUES ($1, $2, $3)', [name, bio, default_tasks], (error, result) => {
+        if (error) {
+            throw error;
+        }
+        response.status(201).send(`User added with ID: ${result.insertId}`);
+    });
+};
+
+const createTimelineItem = (request, response) => {
+    const { teamID, title, description, users } = request.body;
+
+    pool.query('INSERT INTO timeline_items (teamID, title, description, users) VALUES ($1, $2, $3, $4)', [teamID, title, description, users], (error, result) => {
         if (error) {
             throw error;
         }
@@ -63,10 +86,10 @@ const deleteUser = (request, response) => {
     });
 };
 
-const deleteEvent = (request, response) => {
+const deleteTeam = (request, response) => {
     const id = parseInt(request.params.id);
 
-    pool.query('DELETE FROM events WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM teams WHERE id = $1', [id], (error, results) => {
         if (error) {
             throw error;
         }
@@ -75,10 +98,12 @@ const deleteEvent = (request, response) => {
 };
 
 module.exports = {
-    getUsers,
     getUserById,
-    getEvents,
+    getTeamById,
+    getTeamTimelineItems,
     createUser,
+    createTeam,
+    createTimelineItem,
     deleteUser,
-    deleteEvent
+    deleteTeam
 };

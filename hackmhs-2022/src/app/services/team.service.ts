@@ -8,11 +8,11 @@ import { User } from '../shared/services/user';
 })
 export class TeamService {
 
-  devDB: User[] =[<User>{uid: "qwer", orgCode:"1234", email:"g@g.com", displayName: "Bob", photoURL:"123.com", accountType: "admin", teamName:"swag", role:"it supervisor", subjects:["python"]}];
+  devDB: User[] = [<User>{ id: "qwer", org_code: "1234", email: "g@g.com", display_name: "Bob", photo_url: "123.com", account_type: "admin", teamName: "swag", role: "it supervisor", subjects: ["python"] }];
 
   constructor() { }
 
-  getTeam(code:string): Observable<User[]>{
+  getTeam(code: string): Observable<User[]> {
     return of(this.devDB);
   }
 }

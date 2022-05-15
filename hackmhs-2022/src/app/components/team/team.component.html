@@ -1,7 +1,7 @@
 <ng-container *ngFor="let member of team;">
     <div *ngIf = "member.role != undefined && member.subjects != undefined">
-        <img src = "{{member.photoURL}}">
-        <h1>{{member.displayName}}</h1>
+        <img src = "{{member.photo_url}}">
+        <h1>{{member.display_name}}</h1>
         <h3>{{member.role}}</h3>
         <p><strong>Ask me questions about: </strong>{{member.subjects.join(', ')}}.</p>
     </div>
