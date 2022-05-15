@@ -7,10 +7,9 @@ import { TeamComponent } from './components/team/team.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 
 
-const routes: Routes = [{ path: 'login', component: LoginComponent },
-{ path: 'task-list', component: TaskListComponent },
-{ path: 'team', component: TeamComponent },
-{ path: 'timeline', component: TimelineComponent }];
+const routes: Routes = [{path: 'login', component: LoginComponent}, {path:'task-list', component: TaskListComponent},
+  {path: 'home', component: HomeComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

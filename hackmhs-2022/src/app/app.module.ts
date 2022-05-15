@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TeamComponent } from './components/team/team.component';
-import { TimelineComponent } from './components/timeline/timeline.component';
+import { HomeComponent } from './components/home/home.component';
+import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     LoginComponent,
     TaskListComponent,
     TeamComponent,
-    TimelineComponent
+    HomeComponent,
+    TeamSummaryComponent
   ],
   imports: [
     BrowserModule,
