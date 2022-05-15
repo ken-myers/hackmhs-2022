@@ -1,5 +1,27 @@
-<form (ngSubmit) = "submit(orgCode.value)">
+<form (ngSubmit)="submit(orgCode.value)">
     <p>Please enter your organization code:</p>
-    <input #orgCode matInput name = "orgCode" id = "orgCode"/>
+    <input #orgCode matInput name="orgCode" id="orgCode" />
     <button type="submit">Go</button>
 </form>
+
+<div class="authBlock">
+    <h3>Sign In</h3>
+    <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Username" #userName required>
+    </div>
+    <div class="formGroup">
+        <input type="password" class="formControl" placeholder="Password" #userPassword required>
+    </div>
+    <!-- Calling SignIn Api from AuthService -->
+    <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Log in"
+            (click)="authService.SignIn(userName.value, userPassword.value)">
+    </div>
+    <div class="formGroup">
+        <span class="or"><span class="orInner">Or</span></span>
+    </div>
+
+</div>
+<div class="redirectToLogin">
+    <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign Up</span></span>
+</div>
